@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<input type="button" value="浪起来" @click="lang">
+			<input type="button" value="低调" @click="stop">
+			<h4>{{ msg }}</h4>
+		</div>
+		<script src="lib/vue.js"></script>
+		<script>
+			// 注意:在 VM实例中,如果想要获取data上的数据,或者想要调用methods中的方法,必须通过this.数据属性名 或 this.方法名 来进行访问,这里的 this 就表示我们new出来的VM实例对象
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					msg:'猥琐发育，别浪~~!!',
+					intervarId:null   //在data上定义 定时器id
+				},
+				methods:{
+					lang(){
+						if(this.intervarId != null) return ;
+						// console.log(this.msg)
+						this.intervarId = setInterval( () => {
+							//获取到头的第一个字符
+							var start = this.msg.substring(0,1)
+							//获取到后面的所有字符
+							var end = this.msg.substring(1)
+							//重新拼接得到新的字符串,并赋值给 this.msg
+							this.msg = end +start
+						},400)
+					},
+					stop(){ //停止定时器
+						clearInterval(this.intervarId)
+						//每当清除了定时器之后,需要重新把intervalId置为null
+						this.intervarId = null
+						
+					}
+				}
+			})
+		</script>
+		
+		<!-- 分析：
+		1.给【浪起来】按钮绑定一个点击事件 v-on
+		2.在按钮的事件处理函数中，写相关的业务逻辑代码：拿到 msg 字符串，然后调用字符串
+		 的 substring 来进行字符串的截取操作，把 第一个字符截取处理，放到最后一个位置即可
+		 3.为了实现点击一下按钮，自动截取的功能，需要把步骤2中的代码，放到一个定时器中去 -->
+	</body>
+</html>

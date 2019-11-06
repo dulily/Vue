@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<title></title>
+	</head>
+	<body>
+		<!-- 计算属性基础例子 -->
+		<div id="app-1">
+			<p>Original message:"{{ message }}"</p>
+			<p>Computed reversed message:"{{ reversedMessage }}"</p>
+		</div>
+		<script>
+			var app1 = new Vue({
+				el:'#app-1',
+				data:{
+					message:'hello'
+				},
+				computed:{
+					//计算属性的getter
+					reversedMessage:function(){
+						//this指向app1实例
+						return this.message.split('').reverse().join('');
+					}
+				}
+			})
+		</script>
+		<!-- 计算属性 vs 侦听属性 -->
+		<!-- 调用watch的版本 -->
+		<div id="app-2">
+			{{ fullName }}
+		</div>
+		<script>
+			var app2 = new Vue({
+				el:'#app-2',
+				data:{
+					firstName:'Foo',
+					lastName:'Bar',
+					fullName:'Foo Bar',
+				},
+				watch:{
+					firstName:function(val){
+						this.fullName = val + ' ' + this.lastName
+					},
+					lastName:function(val){
+						this.fullName = this.firstName + ' ' + val
+					}
+				}
+			})
+		</script>
+		<!-- 上面的代码是命令式且重复的，将它与计算属性的版本进行比较 -->
+		<div id="app-3">
+			{{ fullName }}
+		</div>
+		<script>
+			var app3 = new Vue({
+				el:'#app-3',
+				data:{
+					firstName:'Foo',
+					lastName:'Bar'
+				},
+				computed:{
+					fullName:function(){
+						return this.firstName + ' ' + this.lastName
+					}
+				}
+			})
+		</script>
+		<!-- 计算属性的setter（自定义） -->
+		<div id="app-4">
+			{{ fullName }}
+		</div>
+		<script>
+			var app4 = new Vue({
+				el:'#app-4',
+				data:{
+					firstName:'Foo',
+					lastName:'Bar'
+				},
+				computed:{
+					fullName:{
+						//getter
+						get:function(){
+							return this.firstName + ' ' + this.lastName							},
+						//setter
+						set:function(newValue){
+							var names = newValue.split(' ')
+							this.firstName = names[0]
+							this.lastName = names[names.length-1]
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

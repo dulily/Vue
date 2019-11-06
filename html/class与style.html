@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>class与style</title>
+	<style>
+		.active{
+			color:red;
+		}
+		.static{
+			background: blueviolet;
+		}
+		.text-danger{
+			text-decoration: underline;
+		}
+	</style>
+</head>
+<body>
+	<!-- 绑定HTML class的对象语法 -->
+	<!-- 给v-bind:class一个对象，以动态地切换class -->
+	<div id="app-1" v-bind:class="{ active:isActive }">
+		{{ msg }}
+	</div>
+	<script>
+		var app1 = new Vue({
+			el:'#app-1',
+			data:{
+				isActive:true,
+				msg:'单个class'
+			}
+		})
+	</script>
+	<!-- 给v-bind:class指令的对象中传入更多属性来动态的切换多个class -->
+	<div class="static" v-bind:class="{ active:isActive,'text-danger':hasError }">
+		{{ msg }}
+	</div>
+	<script>
+		var app2 = new Vue({
+			el:'.static',
+			data:{
+				isActive:true,
+				hasError:false,
+				msg:'多个class'
+			}
+		})
+	</script>
+	<!-- 绑定一个返回对象的计算属性 -->
+	<div id="app-3" v-bind:class="classObject">
+		{{ msg }}
+	</div>
+	<script>
+		var app3 = new Vue({
+			el:'#app-3',
+			data:{
+				isActive:true,
+				error:null,
+				msg:'class与计算属性'
+			},
+			computed:{
+				classObject:function(){
+					return {
+						active:this.isActive && !this.error,
+						'text-danger':this.error && this.error.type ==='fatal'
+					}
+				}
+			}
+		})
+	</script>
+	<!-- 把一个数组传给v-bind:class，以应用一个class列表 -->
+	<div id="app-4" v-bind:class="[activeClass,errorClass]">
+		{{ msg }}
+	</div>
+	<script>
+		var app4 = new Vue({
+			el:'#app-4',
+			data:{
+				activeClass:'active',
+				errorClass:'text-danger',
+				msg:'把数组传给v-bind:class'
+			}
+		})
+	</script>
+	<!-- 多个条件class时，在数组语法中使用对象语法 -->
+	<div id="app-5" v-bind:class="[{active:isActive}, errorClass]">
+		{{ msg }}
+	</div>
+	<script>
+		var app5 = new Vue({
+			el:'#app-5',
+			data:{
+				isActive:true,
+				errorClass:true,
+				msg:'多个条件class时，在数组语法中可以使用对象语法'
+			}
+		})
+	</script>
+	
+	<!-- 绑定内联样式的对象语法 -->
+	<div id="app-6" v-bind:style="{ color:activeColor,fontSize:fontSize + 'px' }">
+		{{ msg }}
+	</div>
+	<script>
+		var app6 = new Vue({
+			el:'#app-6',
+			data:{
+				activeColor:'red',
+				fontSize:30,
+				msg:'绑定内联样式的对象语法'
+			}
+		})
+	</script>
+	<!-- 直接绑定到一个样式对象让模板更清晰 -->
+	<div id="app-7" v-bind:style="styleObject">
+		<p>直接绑定到一个样式对象上让模板更清晰</p>
+	</div>
+	<script>
+		var app7 = new Vue({
+			el:'#app-7',
+			data:{
+				styleObject:{
+					color:'red',
+					fontSize:'20px'
+				}
+			}
+		})
+	</script>
+	<!-- 结合计算属性使用 -->
+	<div id="app-8" v-bind:style="styleObject">
+		{{ msg }}
+	</div>
+	<script>
+		var app8 = new Vue({
+			el:'#app-8',
+			data:{
+				color:'red',
+				fontSize:'14px',
+				msg:'样式对象结合计算属性'
+			},
+			computed:{
+				styleObject:function(){
+					return {
+						color:this.color,
+						fontSize:this.fontSize
+					}
+				}
+			}
+		})
+	</script>
+	<!-- 数组语法 -->
+	<div id="app-9" v-bind:Style="[baseStyles, overridingStyles]">
+		{{ msg }}
+	</div>
+	<script>
+		var app9 = new Vue({
+			el:'#app-9',
+			data:{
+				baseStyles:{
+					color:'red',
+					'text-decoration':'underline'
+				},
+				overridingStyles:{
+					color:'blue',
+					fontSize:'20px'
+				},
+				msg:'数组语法'
+			}
+		})
+	</script>
+</body>
+</html>

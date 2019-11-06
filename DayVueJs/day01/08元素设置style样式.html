@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 这里的style需要使用v-bind做数据绑定 -->
+			<!-- 对象就是无序键值对的集合 -->
+			<!-- <h1 :style="{color:'red','font-wight':200}">这是一个h1</h1> -->
+			<!-- 或者 -->
+			<!-- <h1 :style="styleobj1">这是一个h1</h1> -->
+			
+			<h1 :style="[styleobj1,styleobj2]">这是一个h1</h1>
+		</div>
+		
+		<script src="lib/vue.js"></script>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					styleobj1:{color:'red','font-wight':200},
+					styleobj2:{'font-style':'italic'}
+				},
+				methods:{}
+			})
+		</script>
+	</body>
+</html>

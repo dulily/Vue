@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue实例</title>
+</head>
+<body>
+    <!-- 声明式渲染 -->
+    <div id="app">
+       <p v-once> {{ message }}</p>
+    </div>
+
+    <!-- 绑定元素的特性 -->
+    <div id="app-2">
+        <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+    </div>
+
+    <!-- 条件与循环 -->
+    <div id="app-3">
+        <p v-if="seen">现在你能看到我</p>
+    </div>
+
+    <!-- v-for指令绑定数组的数据来渲染项目列表 -->
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+
+    <!-- 处理用户输入 -->
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">反转消息</button>
+    </div>
+
+    <!-- v-model指令实现表单输入和应用状态之间的双向绑定 -->
+    <div id="app-6">
+        <p>{{ message }}</p>
+        <input type="text" v-model="message">
+    </div>
+
+    <!-- 组件化应用构建 -->
+    <div id="app-7">
+        <ol>
+            <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
+
+    <!-- 阻止修改现有的属性 -->
+    <div id="app-8">
+        <p>{{ foo }}</p>
+        <button v-on:click="foo='baz'">Change it</button>
+    </div>
+
+    <!-- created 钩子在实例被创建之后执行代码 -->
+    <div id="app-9">
+        {{ a }}
+    </div>
+    <!-- 外部js引用在这里 -->
+    <script src="../js/vue01.js"></script>
+</body>
+</html>

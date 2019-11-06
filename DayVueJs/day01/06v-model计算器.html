@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="n1">
+			<select v-model="opt">
+				<option value="+">+</option>
+				<option value="-">-</option>
+				<option value="*">*</option>
+				<option value="/">/</option>
+			</select>
+			<input type="text" v-model="n2">
+			<input type="button" value="=" @click="calc">
+			<input type="text" v-model="result">
+		</div>
+		
+		<script src="lib/vue.js"></script>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					n1:0,
+					n2:0,
+					opt:'+',
+					result:0
+				},
+				methods:{
+					calc(){  //计算器算数的方法
+						//逻辑
+						switch(this.opt){
+							case "+":
+							this.result = parseInt(this.n1) + parseInt(this.n2);
+							break;
+							case "-":
+							this.result = parseInt(this.n1) - parseInt(this.n2);
+							break;
+							case "*":
+							this.result = parseInt(this.n1) * parseInt(this.n2);
+							break;
+							case "/":
+							this.result = parseInt(this.n1) / parseInt(this.n2);
+							break;
+						}
+						
+						//注意:这是投机取巧的方式,正式开发中尽量少用
+						// var codeStr = 'parseInt(this.n1)' + this.opt + 'parseInt(this.n2)' ;
+						//eval()将字符串解析执行,拿到字符串的结果
+						// this.result = eval(codeStr);
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>class与style绑定</title>
+    <style>
+    .active{
+        color:blue;
+    }
+    .static{
+        background-color: yellow;
+    }
+    .text-danger{
+        color:red;
+    }
+    </style>
+</head>
+<body>
+    <div id="demo-1" v-bind:class="{active: isActive}">
+        <p>我是对象语法</p>
+    </div>
+
+    <!-- 动态切换多个class，class属性共存 -->
+    <div id="demo-2" class="static" v-bind:class="{active: isActive,'text-danger': hasError}">
+        <p>动态切换多个class，class属性共存</p>
+    </div>
+
+    <script src="../js/class-style.js"></script>
+</body>
+</html>

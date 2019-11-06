@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>列表渲染</title>
+</head>
+<body>
+	<!-- 用v-for 把一个数组对应为一组元素 -->
+	<p>用v-for 把一个数组对应为一组元素 </p>
+	<div id="app-1">
+		<ul>
+			<li v-for="item in items">
+				{{ item.message }}
+			</li>
+		</ul>
+	</div>
+	<script>
+		var app1 = new Vue({
+			el:'#app-1',
+			data:{
+				items:[
+					{ message:'Foo' },
+					{ message:'haha' },
+					{ message:'yeye' }
+				]
+			}
+		})
+	</script>
+	<!-- v-for块中，还可以访问父作用域的属性，v-for支持一个可选的第二个参数，即当前项的索引 -->
+	<p>v-for块中，还可以访问父作用域的属性，v-for支持一个可选的第二个参数，即当前项的索引 </p>
+	<div id="app-2">
+		<ul>
+			<li v-for="(item, index) in items">
+				{{ parentMessage }} - {{ index }} - {{ item.message }}
+			</li>
+		</ul>
+	</div>
+	<script>
+		var app2 = new Vue({
+			el:'#app-2',
+			data:{
+				parentMessage:'Parent',
+				items:[
+					{ message:'访问父作用域' },
+					{ message:'支持第二个可选参数：index' }
+				]
+			}
+		})
+	</script>
+	<!-- 在v-for时使用对象，遍历一个对象的属性 -->
+	<p>在v-for时使用对象，遍历一个对象的属性</p>
+	<div id="app-3">
+		<ul>
+			<li v-for="value in object">
+				{{ value }}
+			</li>
+		</ul>
+	</div>
+	<script>
+		var app3 = new Vue({
+			el:'#app-3',
+			data:{
+				object:{
+					title:'How to do list in Vue',
+					author:'Du Li',
+					publishedAt:'2019-01-10'
+				}
+			}
+		})
+	</script>
+	<p>提供第二个参数为property名称（键名）</p>
+	<div id="app-4">
+		<ul>
+			<li v-for="(value ,name) in object">
+				{{ name }} : {{ value }}
+			</li>
+		</ul>
+	</div>
+	<script>
+		var app4 = new Vue({
+			el:'#app-4',
+			data:{
+				object:{
+					title:'How are you',
+					answer:'Thinks,I am fine',
+					thing:'I will cook'
+				}
+			}
+		})
+	</script>
+	<p>你还可以用第三个参数作为索引：index（注意：这三个参数的顺序不能变）</p>
+	<div id="app-5">
+		<ul>
+			<li v-for="(value, name ,index) in object">
+				{{ index }}. {{ name }}: {{ value }}
+			</li>
+		</ul>
+	</div>
+	<script>
+		var app5 = new Vue({
+			el:'#app-5',
+			data:{
+				object:{
+					fruits:'banana',
+					snacks:'spicy strips',
+					vegetables:'carrot'
+				}
+			}
+		})
+	</script>
+	<!-- Vue不能检测利用数组索引赋值和修改数组长度 -->
+	<p>Vue不能检测利用数组索引赋值和修改数组长度</p>
+	<div id="app-6">
+		<ul>
+			<li v-for="item in items">
+				{{ item }}
+			</li>
+		</ul>
+	</div>
+	<script>
+		var app6 = new Vue({
+			el:'#app-6',
+			data:{
+				items:[ 'a','b','c' ]
+			}
+		})
+	</script>
+	<p>对象变更检测注意事项：Vue不能检测对象属性的添加或删除，但是允许向嵌套对象添加响应式属性</p>
+	<div id="app-7">
+		<ul>
+			<li v-for="(item,name,index) in objects">
+				{{ index }}. {{ name }} : {{ item }}
+			</li>
+		</ul>
+	</div>
+	<script>
+		var app7 = new Vue({
+			el:'#app-7',
+			data:{
+				objects:{
+					name:'Duli'
+				}
+			}
+		})
+	</script>
+	<!-- 显示过滤/排序后的结果 -->
+	<p>显示过滤/排序后的结果</p>
+	<div id="app-8">
+		<ul>
+			<li v-for="n in evenNumbers">{{ n }}</li>
+		</ul>
+	</div>
+	<script>
+		var app8 = new Vue({
+			el:'#app-8',
+			data:{
+				numbers:[1,2,3,4,5]
+			},
+			computed:{
+				evenNumbers:function(){
+					return this.numbers.filter(function(number){
+						return number % 2 === 0
+					})
+				}
+			}
+		})
+	</script>
+	<p>在计算属性不适用的情况下（例如，在嵌套v-for循环中）你可以使用一个方法：</p>
+	<div id="app-9">
+		<ul>
+			<li v-for="n in even(numbers)">{{ n }}</li>
+		</ul>
+	</div>
+	<script>
+		var app9 = new Vue({
+			el:'#app-9',
+			data:{
+				numbers:[1,2,3,4,5]
+			},
+			methods:{
+				even:function(numbers){
+					return numbers.filter(function(number){
+						return number % 2 === 0
+					})
+				}
+			}
+		})
+	</script>
+</body>
+</html>

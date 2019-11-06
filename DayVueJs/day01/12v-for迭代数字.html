@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- in后面放过普通数组、对象数组、对象，还可以放数字 -->
+			<!-- 使用v-for迭代数字，前面的count值从1开始 -->
+			<p v-for="count in 10">这是第{{ count }}数字</p>
+		</div>
+		
+		<script src="lib/vue.js"></script>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{},
+				methods:{}
+			})
+		</script>
+	</body>
+</html>

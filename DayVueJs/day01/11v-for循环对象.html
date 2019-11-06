@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			注意：在遍历对象身上的键值对的对象时，除了有val，key，在第三个位置还有一个索引
+			<!-- <p v-for="(val,key) in user">值是：{{ val }} -- 键是：{{ key }}</p> -->
+			<p v-for="(val,key,i) in user">值是：{{ val }} -- 键是：{{ key }} -- 索引：{{ i }}</p>
+		</div>
+		
+		<script src="lib/vue.js"></script>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					user:{
+						id:1,
+						name:'duli',
+						gender:'女'
+					}
+				},
+				methods:{}
+			})
+		</script>
+	</body>
+</html>

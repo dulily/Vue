@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- <p v-for="user in list">id:{{ user.id }} --- name:{{ user.name }}</p> -->
+			<p v-for="(user,i) in list">id:{{ user.id }} --- name:{{ user.name }} --- 索引：{{ i }}</p>
+		</div>
+		
+		<script src="lib/vue.js"></script>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					list:[
+						{id:1,name:'zs1'},
+						{id:2,name:'zs2'},
+						{id:3,name:'zs3'},
+						{id:4,name:'zs4'}
+					]
+				},
+				methods:{}
+			})
+		</script>
+	</body>
+</html>

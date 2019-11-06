@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 过滤器：Vue.js允许你自定义过滤器，可被用作一些常见的文本格式化。过滤器可被用在两个地方：mustache插值和v-bind表达式。过滤器应该被添加在JavaScript表达式的尾部，由“管道”符指示 -->
+
+    <!-- 过滤器的定义语法 -->
+    <!-- Vue.filter('过滤器的名称',function(){}) -->
+
+    <!-- 过滤器中的function，第一个参数，已经被规定死了，永远都是 过滤器 管道符前面 传递过来的数据 -->
+    <!-- Vue.filter('过滤器的名称',function(data){
+        return data + '123'
+    }) -->
+
+    <!-- 过滤器调用时候的格式  {{ name | 过滤器的名称 }} -->
+
+
+
+    <!-- 需求：把msg中的单纯全部替换为邪恶 -->
+    <div id="app">
+        <!-- <p>{{ msg | msgFormat }}</p> -->
+        <!-- 过滤器可以传递多个参数 -->
+        <!-- <p>{{ msg | msgFormat('疯狂','123') }}</p> -->
+        <!-- 可以同时使用多个过滤器 -->
+        <p>{{ msg | msgFormat('疯狂','123') | test }}</p>
+    </div>
+
+    <script>
+        //定义一个Vue 全局的过滤器，名字叫做 msgFormat
+        Vue.filter('msgFormat',function(msg,arg,arg2){
+            //字符串的 replace 方法，第一个参数，除了可写一个字符串之外，还可以定义一个正则
+            return msg.replace(/单纯/g,arg+arg2)
+        })
+
+        Vue.filter('test',function(msg){
+            return msg + '=============='
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'在这个单纯的世界，有一个单纯的少女，每天都在渴望另一个同样单纯的男孩'
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

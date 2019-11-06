@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<title></title>
+	</head>
+	<body>
+		<!-- v-once指令能执行一次性的插值，当数据改变时，插值处的内容不会更新，但这会影响到该节点上的其他数据绑定 -->
+		<div id="app-10">
+			<p v-once>{{ msg }}</p>
+		</div>
+		<script>
+			var app10 = new Vue({
+				el:'#app-10',
+				data:{
+					msg:'哈哈，我不会改变哦'
+				}
+			})
+		</script>
+		<!-- 使用v-html指令输出真正的HTML代码 -->
+		<div id="app-11">
+			<p>{{ rawHtml }}</p>
+			<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+		</div>
+		<script>
+			var app11 = new Vue({
+				el:'#app-11',
+				data:{
+					rawHtml:'<span style="color:red">This is should be red.</span>'
+				}
+			})
+		</script>
+		<!-- v-bind指令可以作用在HTML特性上 -->
+		<div id="app-12">
+			<p v-bind:id="dynamicId"></p>
+		</div>
+		<script>
+			var app12 = new Vue({
+				el:'#app-12',
+				data:{
+				dynamicId:'bind'
+				},
+				created:function(){
+					console.log(this.dynamicId);
+				}
+			})
+		</script>
+		<div id="app-13">
+			<button v-bind:disabled="isButtonDisabled">Button</button>
+		</div>
+		<script>
+			// 如果isButtonDisabled的值为null/undefined/false,则disabled特性甚至都不会被包含在渲染出来的<button>元素中
+			var app13 = new Vue({
+				el:'#app-13',
+				data:{
+					isButtonDisabled:false
+				}
+			})
+		</script>
+	</body>
+</html>

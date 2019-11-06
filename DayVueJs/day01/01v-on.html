@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- v-on: 事件绑定机制 -->
+			<!-- v-on: 的属性缩写 @ 事件 -->
+			<!-- <input type="button" value="按钮" v-on:click="show"> -->
+			<input type="button" value="按钮" @click="show">
+		</div>
+		
+		<script src="lib/vue.js"></script>
+		
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					msg:'haha'
+				},
+				methods:{  //这个methods属性中定义了当前Vue实例所有可用的方法
+					show:function(){
+						console.log('hello');
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
