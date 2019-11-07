@@ -28,8 +28,9 @@
 						<!-- 在使用搜索的时候，安装了chrome扩展程序，Vue-devtools工具 -->
 						<label for="">
                             搜索名称关键字:
+                            <!-- 自定义指令 -->
                             <!-- 注意：Vue中的所有指令，在调用的时候，都以 v- 开头 -->
-							<input type="text" class="form-control" v-model="keywords" v-focus>
+							<input type="text" class="form-control" v-model="keywords" v-focus v-color="'green'">
 						</label>
 				  </div>
 			</div>
@@ -59,7 +60,7 @@
 		</div>
         
         <div id="app2">
-            <h3>{{ dt | dateFormat }}</h3>
+            <h3 v-color="'pink'" v-weight="900" v-size="50">{{ dt | dateFormat }}</h3>
         </div>
 		<script src="lib/vue.js"></script>
 		<script>
@@ -101,6 +102,7 @@
 
                 },
                 inserted:function(el){  //inserted 表示元素 插入到DOM中的时候，会执行 inserted函数【触发一次】
+                    //和js行为有关的操作，最好在 inserted 中去执行，防止js行为不生效
                     el.focus()
                 },
                 updated:function(el){   //当VNode更新的时候，会执行 updated，【可能会触发多次】
@@ -108,7 +110,22 @@
                 }
             })
 
-			var vm = new Vue({
+            //自定义 一个 设置字体颜色的指令
+            Vue.directive('color',{
+                //样式：只要通过指令绑定给了元素，不管这个元素有没有被插入到页面中去，这个元素肯定有了一个内联的样式
+                //将来元素肯定会显示在页面中，这时候，浏览器的渲染引擎必然会解析样式，应用给这个元素
+                //binding是形参，参数名可以任意改变
+                bind:function(el,binding){
+                    //和样式相关的操作，一般都可以在 bind 中执行
+                    // el.style.color = 'red'
+                    // console.log(binding.name)  //color
+                    // console.log(binding.value)  //blue
+                    // console.log(binding.expression)  //'blue'
+                    el.style.color = binding.value
+                }
+            })
+            
+            var vm = new Vue({
 				el:'#app',
 				data:{
 					id:'',
@@ -208,6 +225,17 @@
                         }else{
                             return `${y}-${m}-${d} ${h}:${mm}:${ss}~~~`
                         }
+                    }
+                },
+                directives:{  //自定义私有指令
+                    'weight':{  //设置字体粗细的
+                        bind:function(el,binding){
+                            el.style.fontWeight = binding.value
+                        }
+                    },
+                    //指令函数的简写形式
+                    'size':function(el,binding){ //注意：这个function 等同于 把代码写到了 bind 和 update 中去
+                        el.style.fontSize = parseInt(binding.value) + 'px'
                     }
                 }
             })
