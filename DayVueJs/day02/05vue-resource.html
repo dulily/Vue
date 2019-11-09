@@ -30,7 +30,7 @@
             methods: {
                 getInfo(){  //发送get请求
                     //当发起get请求之后，通过 .then 来设置成功的回调函数
-                    this.$http.get('./lib/request.txt').then(function(result){
+                    this.$http.get('http://www.liulongbin.top:3005/api/getlunbo').then(function(result){
                         //通过 result.body 拿到服务器返回的成功的数据
                         console.log(result.body)
                     })
@@ -38,12 +38,12 @@
                 postInfo(){ //发起post请求  application/x-www-form-urlencoded
                     //手动发起的 post 请求，默认没有表单格式，所以，有的服务器处理不了
                     //通过post 方法的第三个参数，{ emulateJSON:true } 设置提交的内容类型为 普通表单数据格式
-                    this.$http.post('http://vue.studyit.io/api/post',{},{}).then(result => {
+                    this.$http.post('http://www.liulongbin.top:3005/api/post',{},{}).then(result => {
                         console.log(result.body)
                     })
                 },
                 jsonpInfo(){ //发起jsonp请求
-                    this.$http.jsonp('./lib/request.txt').then(result => {
+                    this.$http.jsonp('http://www.liulongbin.top:3005/api/jsonp').then(result => {
                         console.log(result.body)
                     })
                 }

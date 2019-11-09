@@ -71,10 +71,9 @@
 
                     this.$http.get('url').then(result => {
                         //注意，通过$http 获取到的数据，都在result.body中放着
-                        var result = result.body
-                        if(result.status == 0){
+                        if(result.body.status == 0){
                             //成功了
-                            this.list = result.message
+                            this.list = esult.body
                         }else{
                             //失败了
                             alert('获取数据失败')

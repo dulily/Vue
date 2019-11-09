@@ -70,12 +70,14 @@
                     //4.当通过 then 指定回调函数之后，在回调函数中，可以拿到数据服务器返回的 result
                     //5.先判断 result.status 是否等于0，如果等于0，就成功了，可以把result.body.result 赋值给 this.list;如果不等于0，可以弹框提现，获取数据失败！
 
-                    this.$http.get('url').then(result => {
+                    this.$http.get('http://www.liulongbin.top:3005/api/getlunbo').then(result => {
                         //注意，通过$http 获取到的数据，都在result.body中放着
                         var result = result.body
                         if(result.status == 0){
                             //成功了
                             this.list = result.message
+                            console.log('llll')
+                            console.log(this.list)
                         }else{
                             //失败了
                             alert('获取数据失败')
