@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 一.网页中会引用哪些常见的静态资源？
+    1.js
+        .js .jsx .coffee .ts(TypeScript)
+    2.css
+        .css .less .scss
+    3.Images
+        .jpg .png .bmp .svg
+    4.字体文件(fonts)
+        .svg .ttf .woff .woff2 .eot
+    5.模板文件
+        .ejs .wue【这是在webpack中定义组件的方式，推荐使用】
+    二.网页中引入的静态资源多了以后有什么问题？
+    1.网页加载速度慢，因为我们要发起很多的二次请求
+    2.要处理错综复杂的依赖关系
+    三.如何解决上面两个问题
+    1.合并、压缩、精灵图、图片的Base64编码
+    2.可以使用requireJS、也可以使用webpack可以解决各个包之间的复杂依赖关系
+    四.什么是webpack？
+    webpack 是前端的一个项目构建工具，它是基于 Node.js 开发出来的一个前端工具
+    使用gulp，是基于 task 任务的
+    使用webpack，是基于整个项目进行构建的
+    借助于webpack这个前端自动化构建工具，可以完美实现资源的合并，打包，压缩，混淆等功能  -->
+    
+    <div id="app"></div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>
