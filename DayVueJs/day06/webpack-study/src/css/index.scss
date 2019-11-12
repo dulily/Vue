@@ -1,0 +1,18 @@
+html,body{
+    .scss{
+        background-color: red;
+        width: 100px;
+        height: 100px;
+        //默认情况下，webpack 无法处理 CSS文件中的 url 地址，不管是图片还是字体库，只要是 URL地址，都处理不了
+        background: url(../images/girl.jpeg);
+        background-size: cover;
+    }
+    .scss2{
+        background-color: red;
+        width: 100px;
+        height: 100px;
+        //默认情况下，webpack 无法处理 CSS文件中的 url 地址，不管是图片还是字体库，只要是 URL地址，都处理不了
+        background: url(../images2/girl.jpeg);
+        background-size: cover;
+    }
+}
