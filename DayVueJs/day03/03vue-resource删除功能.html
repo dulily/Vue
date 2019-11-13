@@ -41,7 +41,7 @@
                     <td>{{ item.id }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.cTime }}</td>
-                    <td><a href="" @click="del(item.id)">删除</a></td>
+                    <td><a href="" @click.prevent="del(item.id)">删除</a></td>
                 </tr>
             </tbody>
         </table>
